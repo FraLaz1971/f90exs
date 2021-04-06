@@ -1,0 +1,35 @@
+FC = gfortran -g -O2
+SRC = $(wildcard src/*.f)
+OBJ = obj/*.o
+EEXE = .exe
+OEXE = .obj
+SRC = src/natasha.f
+src/readfour.f
+src/s.f
+OBJ = *.o
+FFLAGS = -Iinclude
+LDFLAGS = -Llib -lm
+TARGET0 = natasha
+TARGET1 = readfour
+TARGET2 = s
+TARGETS = s readfour natasha
+all: $(TARGETS)
+obj/$(TARGET0).o: src/natasha.f
+	$(FC) -c   $< -o obj/natasha.o $(FFLAGS)
+$(TARGET0): obj/natasha.o
+	$(FC) -o natasha $< $(LDFLAGS)
+obj/$(TARGET1).o: src/readfour.f
+	$(FC) -c   $< -o obj/readfour.o $(FFLAGS)
+$(TARGET1): obj/readfour.o
+	$(FC) -o readfour $< $(LDFLAGS)
+obj/$(TARGET2).o: src/s.f
+	$(FC) -c   $< -o obj/s.o $(FFLAGS)
+$(TARGET2): obj/s.o
+	$(FC) -o s $< $(LDFLAGS)
+install: all
+	mv $(TARGETS) bin
+.PHONY: clean
+clean:
+	rm -f $(OBJ) $(TARGETS)
+distclean: clean
+	rm -f bin/* Makefile

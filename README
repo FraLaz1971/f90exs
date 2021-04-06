@@ -1,0 +1,151 @@
+# this project contains simple fortran (f77) examples
+# some of them inspired by exercises in the tutorial designed 
+# to be used in the course SCCM-001-F: 
+# "Introduction to Fortran at Stanford University", 1996. 
+# Permission to use this tutorial for educational and
+# other non-commercial purposes is granted 
+# provided all author and copyright information is retained. 
+# Erik Boman, Stanford, December 1995
+# many thanks to Erik Boman and Stanford University, California, USA.
+# https://en.wikipedia.org/wiki/Stanford_University
+# tutorial and explanations can be accessed also at
+# https://www.tat.physik.uni-tuebingen.de/~kley/lehre/ftn77/tutorial/index.html
+# it has been tested with the gnu gfortran compiler and gnu toolchain
+# to run with other compiler / toolchains , please refer to related manuals
+# there are included some f90 / f95 examples exercises
+# inspired by the book written by Ian D. Chivers and Jane Sleightholme
+# "Introduction to Programming with Fortran", 2006
+# programs has been also compiled and tested 
+# using Salford FTN77  compiler for MicroSoft Windows 32bit.
+# to compile all the f77 examples on unix-like OS, type
+./configure
+# then type
+make
+#or
+gmake
+#to install
+make install
+#to compile only one of them, say circle.f, type
+make circle
+# to use
+./circle
+#or when installed
+bin/circle
+#or
+./while <<< 150
+#to remove generated files type
+make clean
+#to remove ALL generated files, included Makefile (you have to run ./configure again, then)
+make distclean
+#to see the generated executable files
+ls . bin
+#to see all generated files
+lsa *
+#aka 
+ls -alhrt *
+#generated programs are in the current dir after make
+#or inside bin after make install
+#look also at
+#src/README
+# it's included a fortran90 example wages.f90
+# it prints wages and taxation of employees
+# computing from input data given interactively by the user
+# to compile it with gfortran
+gfortran src/wages.f90 -o wages
+# to run
+./wages
+# fortran 99 / 95 (and maybe 2003 2008) programs
+# should be compiled separately and a proper compiler is needed
+# energies.f shows statement functions definition and usage
+./energies < data/masses.dat
+# to save output on file
+./energies < data/masses.dat > data/energies.dat
+# doc/energymass.svg
+# doc/energymass.png
+# has been created with gnuplot using input and output file 
+# of the energies.f example program (path in unix-like syntax)
+gnuplot -p -e "set logscale y; plot 'data/masses.dat' with lines, 'data/energies.dat' with lines"
+# exercise pg. 26 n 2.3 Ellis, 1982 fortran 77 structured programming
+./test23 <data/test23.dat
+# sumn.f sums first n integers , input n in [1:+INF) from stdin
+# setting stderr output to output file 2 make save on ascii file using gfortran
+# and on screen using ftn77
+../fexamples
+├── bin
+├── config
+│   ├── bin
+│   ├── configure-gfortran.sh
+│   ├── configure-mac-gfortran.sh
+│   ├── configure-win-ftn77.sh
+│   ├── configure-win-i686-gfortran.sh
+│   ├── configure-win-x86_64-gfortran.sh
+│   └── obj
+├── configure
+├── data
+│   ├── biostats2.csv
+│   ├── biostats.csv
+│   ├── biostatsnew.csv
+│   ├── energies.dat
+│   ├── masses.dat
+│   ├── MILES-ELLIS_big.dat
+│   ├── MILES-ELLIS.dat
+│   ├── MILES-ELLIS-dots.dat
+│   ├── points.dat
+│   ├── sum10.dat
+│   ├── SUROUT.dat
+│   ├── SURVEY2.dat
+│   ├── SURVEY.dat
+│   ├── SURVEYin.dat
+│   ├── test23bis.dat
+│   ├── test23.dat
+│   └── type1tofinal.awk
+├── doc
+│   ├── energies.dia
+│   ├── energies.png
+│   ├── energymass.png
+│   └── energymass.svg
+├── LICENSE
+├── Makefile
+├── Makefile.lnx
+├── Makefile.winftn77
+├── obj
+├── README
+├── src
+│   ├── ansurv.f
+│   ├── circle.f
+│   ├── circles.f90
+│   ├── energies.f
+│   ├── filei.f
+│   ├── fileio.f
+│   ├── fileir.f
+│   ├── fileo.f
+│   ├── fileoo.f
+│   ├── fileorig.f
+│   ├── first.f
+│   ├── firstfmt.f
+│   ├── format.f
+│   ├── getfilnam.f
+│   ├── getfilnam.for
+│   ├── inpdat.f
+│   ├── matrix.f
+│   ├── README
+│   ├── solvequad.f
+│   ├── stdio0.txt
+│   ├── stdio1.txt
+│   ├── stdio.txt
+│   ├── strings.f
+│   ├── strings.f90
+│   ├── sum10.f
+│   ├── sumn.f
+│   ├── sums.f
+│   ├── sunearth.f
+│   ├── surea.f
+│   ├── survrec.f
+│   ├── test23.f
+│   ├── trunc.f
+│   ├── types.f
+│   ├── wages.f90
+│   └── while.f
+└── SURVEYin
+
+8 directories, 68 files

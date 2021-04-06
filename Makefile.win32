@@ -1,0 +1,90 @@
+FC = i686-w64-mingw32-gfortran -g -O2
+SRC = $(wildcard src/*.f src/*.f90 src/*.for)
+RM = rm -f
+EEXT = .exe
+OEXT = .o
+OBJ    = $(addsuffix $(OEXT), $(basename ${SRC}))
+OBJDIR = obj
+FFLAGS = -Iinclude
+LDFLAGS = -Llib -lm
+TARGET0 = c2f
+TARGET1 = errs
+TARGET2 = ex22
+TARGET3 = fintest
+TARGET4 = format01
+TARGET5 = natasha90
+TARGET6 = natasha
+TARGET7 = p26
+TARGET8 = readfour90
+TARGET9 = readfour
+TARGET10 = s
+TARGET11 = si
+TARGET12 = test310
+TARGET13 = whattime
+TARGETS = whattime test310 si s readfour readfour90 p26 natasha natasha90 format01 fintest ex22 errs c2f
+OBJS = obj/natasha.o obj/readfour.o obj/s.o obj/natasha.o obj/readfour.o obj/s.o obj/natasha.o obj/readfour.o obj/s.o
+RMTARGETS = whattime.exe test310.exe si.exe s.exe readfour.exe readfour90.exe p26.exe natasha.exe natasha90.exe format01.exe fintest.exe ex22.exe errs.exe c2f.exe
+all: $(TARGETS)
+obj/$(TARGET0)$(OEXT): src/c2f.f90
+	$(FC) -c   $? -o obj/c2f$(OEXT) $(FFLAGS)
+$(TARGET0): obj/c2f$(OEXT)
+	$(FC) -o c2f$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET1)$(OEXT): src/errs.f90
+	$(FC) -c   $? -o obj/errs$(OEXT) $(FFLAGS)
+$(TARGET1): obj/errs$(OEXT)
+	$(FC) -o errs$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET2)$(OEXT): src/ex22.f90
+	$(FC) -c   $? -o obj/ex22$(OEXT) $(FFLAGS)
+$(TARGET2): obj/ex22$(OEXT)
+	$(FC) -o ex22$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET3)$(OEXT): src/fintest.f90
+	$(FC) -c   $? -o obj/fintest$(OEXT) $(FFLAGS)
+$(TARGET3): obj/fintest$(OEXT)
+	$(FC) -o fintest$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET4)$(OEXT): src/format01.f90
+	$(FC) -c   $? -o obj/format01$(OEXT) $(FFLAGS)
+$(TARGET4): obj/format01$(OEXT)
+	$(FC) -o format01$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET5)$(OEXT): src/natasha90.f90
+	$(FC) -c   $? -o obj/natasha90$(OEXT) $(FFLAGS)
+$(TARGET5): obj/natasha90$(OEXT)
+	$(FC) -o natasha90$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET6)$(OEXT): src/natasha.f
+	$(FC) -c   $? -o obj/natasha$(OEXT) $(FFLAGS)
+$(TARGET6): obj/natasha$(OEXT)
+	$(FC) -o natasha$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET7)$(OEXT): src/p26.f90
+	$(FC) -c   $? -o obj/p26$(OEXT) $(FFLAGS)
+$(TARGET7): obj/p26$(OEXT)
+	$(FC) -o p26$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET8)$(OEXT): src/readfour90.f90
+	$(FC) -c   $? -o obj/readfour90$(OEXT) $(FFLAGS)
+$(TARGET8): obj/readfour90$(OEXT)
+	$(FC) -o readfour90$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET9)$(OEXT): src/readfour.f
+	$(FC) -c   $? -o obj/readfour$(OEXT) $(FFLAGS)
+$(TARGET9): obj/readfour$(OEXT)
+	$(FC) -o readfour$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET10)$(OEXT): src/s.f
+	$(FC) -c   $? -o obj/s$(OEXT) $(FFLAGS)
+$(TARGET10): obj/s$(OEXT)
+	$(FC) -o s$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET11)$(OEXT): src/si.for
+	$(FC) -c   $? -o obj/si$(OEXT) $(FFLAGS)
+$(TARGET11): obj/si$(OEXT)
+	$(FC) -o si$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET12)$(OEXT): src/test310.f90
+	$(FC) -c   $? -o obj/test310$(OEXT) $(FFLAGS)
+$(TARGET12): obj/test310$(OEXT)
+	$(FC) -o test310$(EEXT) $< $(LDFLAGS)
+obj/$(TARGET13)$(OEXT): src/whattime.f90
+	$(FC) -c   $? -o obj/whattime$(OEXT) $(FFLAGS)
+$(TARGET13): obj/whattime$(OEXT)
+	$(FC) -o whattime$(EEXT) $< $(LDFLAGS)
+install: all
+	mv $(RMTARGETS) bin
+.PHONY: clean
+clean:
+	$(RM) $(OBJDIR)/*$(OEXT) $(OBJS) $(RMTARGETS)
+distclean: clean
+	$(RM) -f bin/* Makefile
